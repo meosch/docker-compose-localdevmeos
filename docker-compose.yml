@@ -58,7 +58,7 @@ localdevdrupal:
     - mysqldata
 mysqldata:
   hostname: mysqldata
-  image: meosch/localdevmysqldata
+  image: meosch/localdevdrupaldata
 
 # CLI node
 # Used for all console commands and tools.
