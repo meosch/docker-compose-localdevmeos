@@ -1,0 +1,3 @@
+# Ignore webroot files we just want the docker project.
+public_html
+Dockerfile
