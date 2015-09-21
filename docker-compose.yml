@@ -22,7 +22,7 @@ dockergen:
     - "~/units/dockergen/:/etc/docker-gen/templates"
     
 ### The next line must be changed if moving this to a new folder. Change the part before _globalnginx_1 -watch to the name of the folder without any underlines and possibly dashes(have not tested dashes).
-  command: -notify-sighup dockerdrupal_globalnginx_1 -watch -only-exposed /etc/docker-gen/templates/nginx.tmpl /etc/nginx/conf.d/default.conf
+  command: -notify-sighup localdevmeos_globalnginx_1 -watch -only-exposed /etc/docker-gen/templates/nginx.tmpl /etc/nginx/conf.d/default.conf
   links:
     - globalnginx
 
@@ -45,7 +45,7 @@ localdevdrupal:
     - MYSQL_PASSWORD=drupalrocks
     - MYSQL_DATABASE=drupal
 ### Change the subdomain (xxxxx.docker) to give this container its own address.
-    - VIRTUAL_HOST=localdev.docker
+    - VIRTUAL_HOST=localdevmeos.docker
   volumes_from:
     - mysqldata
   volumes:
