@@ -46,8 +46,8 @@ localdevdrupal:
     - MYSQL_DATABASE=drupal
 ### Change the subdomain (xxxxx.docker) to give this container its own address.
     - VIRTUAL_HOST=localdevmeos.docker
-  volumes_from:
-    - mysqldata
+#  volumes_from:
+#    - mysqldata
   volumes:
     - "./public_html/:/var/www"
     - "./mysqldata/:/data"
