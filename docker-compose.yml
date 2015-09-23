@@ -50,15 +50,16 @@ localdevdrupal:
     - mysqldata
   volumes:
     - "./public_html/:/var/www"
+    - "./mysqldata/:/data"
 # PHP configuration overrides
     - "./.drude/etc/php5/php.ini:/etc/php5/fpm/conf.d/z_php.ini"
     - ~/.ssh:/.ssh   # Linux
   links:
     - dockergen
-    - mysqldata
-mysqldata:
-  hostname: mysqldata
-  image: meosch/localdevdrupaldata
+#    - mysqldata
+#mysqldata:
+#  hostname: mysqldata
+#  image: meosch/localdevdrupaldata
 
 # CLI node
 # Used for all console commands and tools.
