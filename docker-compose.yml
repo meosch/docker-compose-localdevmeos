@@ -65,7 +65,7 @@ localdevdrupal:
 # Used for all console commands and tools.
 cli:
   hostname: cli
-  image: blinkreaction/drupal-cli:php-5.6
+  image: meosch/drupal-cli:php-5.6
   volumes:
     # Project root folder mapping
 #    - ./:/var/www
@@ -73,10 +73,15 @@ cli:
     # PHP configuration overrides
     - "./.drude/etc/php5/php-cli.ini:/etc/php5/cli/conf.d/z_php.ini"
     # Host SSH keys mappings.
-    # We try to map both options. The startup.sh script in cli container will decide which one to use.
-    - ~/.ssh:/.ssh   # Linux
-    # Acquia credentials mapping
-    #- ~/.acquia:/root/.acquia # Linux
+    # The startup.sh script in cli container will copy ssh and drush settings to the container.
+    - "~:/.home-linux"  # Linux
+    # Local Development Home overrides - Drush Alias need different settings if run on host or on container.
+    # These will be copied into the drush folder and are not live. 
+    - "./.home-localdev:/.home-localdev"
+#   - "./milkshake.aliases.drushrc.php:/root/.drush/milkshake.aliases.drushrc.php"
+  environment:
+    # Optional. Specify a custom SSH RSA key name if necessary. Defaults to 'id_rsa'.
+    - SSH_KEY_NAME=id_rsa
   links:
 #    - db
     - localdevdrupal
