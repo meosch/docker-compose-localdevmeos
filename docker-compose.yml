@@ -68,7 +68,7 @@ cli:
   image: meosch/drupal-cli:php-5.6
   volumes:
     # Project root folder mapping
-#    - ./:/var/www
+    - "./public_html/:/var/www"
 #    - ./project
     # PHP configuration overrides
     - "./.drude/etc/php5/php-cli.ini:/etc/php5/cli/conf.d/z_php.ini"
