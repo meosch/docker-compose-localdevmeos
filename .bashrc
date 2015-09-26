@@ -96,10 +96,6 @@ fi
 # Part of keyboard/terminal bell fix
 [ "$DISPLAY" ] && xset b 100
 
-# For Drupal 8 vagrant setup
-export VD8_UID=2000
-export VD8_GROUP=vagrant
-
 # Add some neat bash completion to drush commands
     if [ -f ~/.drush.bashrc ] ; then
         . ~/.drush.bashrc
