@@ -55,16 +55,12 @@ localdevdrupal:
     - "./mysqldata/:/data"
     # PHP configuration overrides
     - "./.drude/etc/php5/php.ini:/etc/php5/fpm/conf.d/z_php.ini"
-    - ~/.ssh:/.ssh   # Linux
     # Host SSH keys mappings.
     # The startup.sh script in cli container will copy ssh and drush settings to the container.
     - "~:/.home-linux"  # Linux
     # Local Development Home overrides - Drush Alias need different settings if run on host or on container.
     # These will be copied into the drush folder and are not live. 
     - "./.home-localdev:/.home-localdev"
-  environment:
-    # Optional. Specify a custom SSH RSA key name if necessary. Defaults to 'id_rsa'.
-    - SSH_KEY_NAME=id_rsa    
   links:
     - dockergen
 #    - mysqldata
