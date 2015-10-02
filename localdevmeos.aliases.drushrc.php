@@ -1,9 +1,7 @@
 <?php
 $aliases['dev'] = array(
   'root' => '/var/www',
-  'remote-user' => 'root',
-  'remote-host' => 'localdevdrupal', // Docker container hostname from docker-compose.yml
-  'ssh-options' => '', // Or any other port you specify when running the container -p 9022
+  'uri' => 'localdevmeos.docker',
   'path-aliases' => array(
     '%files' => 'sites/default/files', 
     ),
