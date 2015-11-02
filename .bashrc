@@ -96,6 +96,12 @@ else
 #    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
     PS1="[\d \t \u@\h \${VIRTUAL_HOST}:\w \$(__git_ps1)] $ "
 fi
+# How to change Gnome-Terminal title? http://askubuntu.com/a/22417
+if [  $TERM = xterm ]; then
+echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"
+fi
+}
+PROMPT_COMMAND=set_bash_prompt
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
