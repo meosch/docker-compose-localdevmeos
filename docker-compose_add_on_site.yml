@@ -7,11 +7,15 @@ localdevdrupal:
     - "80"
     - "22"
     - "3306"
-  ports: 
+## Commenting out ports number as we do not use them. Left them here in case we want to use them later or turn them back on.
+## We can have every add on using the same host computer's port numbers.
+## Watching Interpolate environment variables #1765 to see if later we can configure these via environmental variables if we still need / want them.
+## https://github.com/docker/compose/pull/1765
+# ports: 
 #    - "9080:80"
-    - "8022:22"
-    - "8006:3306"
-    - "8001:9001"
+#    - "8022:22"
+#    - "8006:3306"
+#    - "8001:9001"
   environment:
 # MySQL variables are not used. This is not working  for me. 
 #    - MYSQL_ROOT_PASSWORD=admin123
