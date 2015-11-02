@@ -50,6 +50,24 @@ case "$TERM" in
     xterm-color) color_prompt=yes;;
 esac
 
+function parse_git_branch(){
+    git_dir=$(git rev-parse --git-dir 2>/dev/null)
+    if [ -n "$git_dir" ]; then
+      fish_git_dirty_color='\e[0;31m' # Red
+      fish_git_not_dirty_color='\e[0;32m' # Green
+      gitbranch=$(git branch 2>/dev/null | grep -e '\* ' | sed 's/^..\(.*\)/\1/')
+      git_diff=$(git diff 2>/dev/null)
+        if [ -z "$git_diff" ]; then
+          printf "$fish_git_not_dirty_color"
+        else
+          printf "$fish_git_dirty_color"
+        fi 
+    fi
+
+
+}
+
+set_bash_prompt(){
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
