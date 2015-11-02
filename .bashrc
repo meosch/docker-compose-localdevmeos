@@ -1,3 +1,7 @@
+# .bash_profile vs .bashrc
+# http://www.joshstaiger.org/archives/2005/07/bash_profile_vs.html
+
+
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
@@ -5,9 +9,15 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# don't put duplicate lines or lines starting with space in the history.
+export GIT_PS1_SHOWDIRTYSTATE=yes
+export GIT_PS1_SHOWSTASHSTATE=yes
+export GIT_PS1_SHOWUNTRACKEDFILES=yes
+export GIT_PS1_SHOWUPSTREAM="auto"
+export GIT_PS1_SHOWCOLORHINTS=true
+
+# don't put lines starting with space in the history.
 # See bash(1) for more options
-HISTCONTROL=ignoreboth
+HISTCONTROL=ignorespace
 
 # append to the history file, don't overwrite it
 shopt -s histappend
