@@ -90,10 +90,11 @@ else
 fi
 if [ "$color_prompt" = yes ]; then
 #    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-PS1='[\[\033[01;33m\]\d \[\033[01;37m\]\t \[\033[01;36m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]]\[\033[1;35m\]$(__git_ps1) \[\033[00m\]$ '
+#PS1='[\[\033[01;33m\]\d \[\033[01;37m\]\t \[\033[01;36m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]]$(parse_git_branch)$(__git_ps1) \[\033[00m\]$ '
+PS1='[\[\033[01;33m\]\d \[\033[01;37m\]\t \[\033[01;36m\]\u@\h\[\033[00m\]\[\033[01;37m\]${virtualhostmarker}\[\033[00;37m\]\[\033[04;34m\]${VIRTUAL_HOST}\[\033[00;34m\]\[\033[01;34m\]:\w\[\033[00m\]\[\033[1;35m\]$(__git_ps1) \[\033[00m\]$ '
 else
 #    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-    PS1="[\d \t \u@\h:\w \$(__git_ps1)] $ "
+    PS1="[\d \t \u@\h \${VIRTUAL_HOST}:\w \$(__git_ps1)] $ "
 fi
 unset color_prompt force_color_prompt
 
