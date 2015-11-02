@@ -59,6 +59,8 @@ else
   if [ "$currentdockercomposeyml" = "${addonsiteyml}" ]; then
     type="add on site"
     doit
+  else
+    echo "${red}Sorry I did not find either of our .yml files, ${allcontainersyml} or ${addonsiteyml} ${NC}."
   fi
 fi
 }
