@@ -1,0 +1,40 @@
+### See the line below that start with ### for changes needed when creating a new container with this file. - FJH
+
+localdevdrupal:
+  hostname: localdevdrupal
+  image: meosch/localdevdrupal
+  expose:
+    - "80"
+    - "22"
+    - "3306"
+  ports: 
+#    - "9080:80"
+    - "8022:22"
+    - "8006:3306"
+    - "8001:9001"
+  environment:
+# MySQL variables are not used. This is not working  for me. 
+#    - MYSQL_ROOT_PASSWORD=admin123
+#    - MYSQL_USER=drupal
+#    - MYSQL_PASSWORD=drupalrocks
+#    - MYSQL_DATABASE=drupal
+### Change the subdomain (xxxxx.docker) to give this container its own address.
+    - VIRTUAL_HOST=localdevmeos.docker
+#  volumes_from:
+#    - mysqldata
+  volumes:
+    # Project root folder mapping
+    - "./public_html/:/var/www"
+    # MySQL data folder mapping
+    - "./mysqldata/:/data"
+    # PHP configuration overrides
+    - "./.drude/etc/php5/php.ini:/etc/php5/fpm/conf.d/z_php.ini"
+    # Host SSH keys mappings.
+    # The startup.sh script in cli container will copy ssh and drush settings to the container.
+    - "~:/.home-linux"  # Linux
+    # Local Development Home overrides - Drush Alias need different settings if run on host or on container.
+    # These will be copied into the drush folder and are not live. 
+    - "./.home-localdev:/.home-localdev"
+#  links:
+#    - dockergen
+#    - mysqldata
