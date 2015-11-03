@@ -139,3 +139,6 @@ fi
     if [ -f ~/.drush.bashrc ] ; then
         . ~/.drush.bashrc
     fi
+
+# Send us to the Docker Container webroot /var/www/ as that is where we want to be most likely.
+cd /var/www/
