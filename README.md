@@ -17,6 +17,10 @@ This is a script to switch the **docker-compose.yml** link file between the full
 
 `./change-enviro-type.sh`
 
+### Template Drush Alias file for other docker containers
+
+ The Drush alias template file **localdevmeos-docker_add_on.aliases.drushrc.php** will be modified by the setup-new-localdev.sh script to made it ready to use by other Docker containers. Just copy it to the other containers **.home-localdev/.drush/** folder so that it will be copied into the container on start up. If the container is already running a restart will be needed to use this new drush alias file. 
+
 ### Main container
 
 The main container used in the **docker-compose.yml** file has its own project, meosch/docker-localdevdrupal found here: https://github.com/meosch/docker-localdevdrupal
