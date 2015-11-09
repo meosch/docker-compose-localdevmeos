@@ -42,3 +42,5 @@ localdevdrupal:
 #  links:
 #    - dockergen
 #    - mysqldata
+  extra_hosts:
+    - "docker:172.17.42.1"
