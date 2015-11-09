@@ -1,5 +1,5 @@
 # docker-compose-localdevmeos
-docker-compose.yml and friends for setting up a local development environment on Linux for MEOS
+docker-compose.yml and friends for setting up a local development environment on Linux (Ubuntu 14.04) for MEOS
 
 # Github project
 https://github.com/meosch/docker-compose-localdevmeos
@@ -7,15 +7,23 @@ https://github.com/meosch/docker-compose-localdevmeos
 ### docker-compose.yml files
 
 The project contains two docker-compose.yml files and a link. 
-* **docker-compose-all_containers.yml8** - All containers including support containers, only one instance can be run at a time (and/or only one is needed.)
+* **docker-compose-all_containers.yml** - All containers including support containers, only one instance can be run at a time (and/or only one is needed.)
 * **docker-compose_add_on_site.yml** - Only containers needed for adding an additional site to running all_containers site (currently only the localdevdrupal container).
 * **docker-compose.yml** - Is a link to one of the above to files to allow for easy switching.
  
+
 ### change-enviro-type.sh
 
 This is a script to switch the **docker-compose.yml** link file between the full **docker-compose_all_containers.yml** file and the **docker-compose_add_on_site.yml** file. You can run in on the command line inside the development environment like this:
 
 `./change-enviro-type.sh`
+
+###docker-gen.conf
+
+The docker-gen.conf file will generate three different files using information from the containers using 3 templates.
+* **nginx.tmpl** generates **/etc/nginx/conf.d/default.conf** which is the configuration for Nginx and uses the **VIRTUAL_HOST** environmental variable to set domains to reach webservers runing in container.
+* **dnsmasq.tmpl** generates **/tmp/dockerhosts/dockerhosts** which can be used by the Docker host dnsmasq to allow the containers to be reachable from the host computer
+* **dockerhostdns.tmpl** generates **/tmp/dockerhosts/docker** sets a static ip address for the **.docker** domain
 
 ### Template Drush Alias file for other docker containers
 
