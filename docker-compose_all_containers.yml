@@ -21,7 +21,6 @@ dockergen:
     - "/var/run/docker.sock:/tmp/docker.sock"
     - "~/units/dockergen/:/etc/docker-gen/templates"
     - "./docker-gen.conf:/etc/docker-gen/conf.d/docker-gen.conf"
-    - "./docker-dns:/etc/dnsmasq.d/"
     - "/tmp/dockerhosts:/tmp/dockerhosts"
   command: -config /etc/docker-gen/conf.d/docker-gen.conf 
   links:
