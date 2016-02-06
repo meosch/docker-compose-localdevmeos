@@ -21,7 +21,7 @@ dockergen:
     - "/var/run/docker.sock:/tmp/docker.sock"
     - "~/units/dockergen/:/etc/docker-gen/templates"
     - "./docker-gen.conf:/etc/docker-gen/conf.d/docker-gen.conf"
-    - "/tmp/dockerhosts:/tmp/dockerhosts"
+    - "/var/tmp/dockerhosts:/var/tmp/dockerhosts"
   command: -config /etc/docker-gen/conf.d/docker-gen.conf 
   links:
     - globalnginx
