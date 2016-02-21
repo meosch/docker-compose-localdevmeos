@@ -1,0 +1,1 @@
+1. Add a default **settings.php** file to be used in the local development environments. This will be installed by the setup-new-localdev.sh script in the localdevsetup repo.
