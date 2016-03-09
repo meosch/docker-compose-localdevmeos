@@ -5,6 +5,7 @@ globalnginx:
   volumes:
     - "/tmp/nginx:/etc/nginx/conf.d"
     - "~/units/globalnginx/certs:/etc/nginx/certs"
+    - "./.drude/etc/nginx/nginx.conf:/etc/nginx/nginx.conf"
   expose:
     - "80"
     - "443"
