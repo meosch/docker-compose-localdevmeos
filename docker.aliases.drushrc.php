@@ -11,6 +11,11 @@
 //  'parent' => '@docker.localdev',
 //  'uri' => 'environmentname.docker',
 // );
+//
+// This alias can also be used directly to access the container running
+// in the all_container mode, like this:
+// drush @docker.localdev ssh
+// Other drush commands can be run in a similar way.
 
 $aliases['localdev'] = array(
   'root' => '/var/www',
@@ -35,25 +40,3 @@ $aliases['localdev'] = array(
     ),
   ),
 );
-/* $aliases['hamburger'] = array(
-  'root' => '/var/www',
-  'remote-user' => 'root',
-  'remote-host' => 'localhost',
-  'ssh-options' => '-p 9022', // Or any other port you specify when running the container
-  'target-command-specific' => array(
-    'sql-sync' => array(
-      'sanitize' => TRUE,
-      'confirm-sanitizations' => TRUE,
-      'no-ordered-dump' => TRUE,
-      'no-cache' => TRUE,
-      'enable' => array(
-        'devel',
-        'stage_file_proxy',
-        'ds_ui',
-        'fields_ui',
-        'views_ui',
-      ),
-    ),
-  ),
-);
-*/
