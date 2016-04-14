@@ -53,6 +53,8 @@ localdevdrupal:
     - "./public_html/:/var/www"
     # MySQL data folder mapping
     - "./mysqldata/:/data"
+    # Drupal private files folder. Set this to /var/tmp/private in Drupal.
+    - "./private/:/var/tmp/private"
     # PHP configuration overrides
     - "./.drude/etc/php5/php.ini:/etc/php5/fpm/conf.d/z_php.ini"
     # Host SSH keys mappings.
