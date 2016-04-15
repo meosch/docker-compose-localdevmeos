@@ -606,7 +606,7 @@ $conf['habitat'] = 'dev';
 $conf['less_devel'] = FALSE;
 
 // Site file paths No trailing slashes(/) needed on these. These paths are absolute file system paths.
-$conf['file_private_path'] = '/var/tmp/private'
-$conf['file_temporary_path'] = '/tmp'
+$conf['file_private_path'] = '/var/tmp/private';
+$conf['file_temporary_path'] = '/tmp';
 // Public path is normally sites/default/files  This path is relative to the Drupal webroot. No leading or trailing slashes(/)!
 //$conf['file_public_path'] = 'sites/default/files'
