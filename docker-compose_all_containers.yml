@@ -46,6 +46,8 @@ localdevdrupal:
 #    - MYSQL_DATABASE=drupal
 ### Change the subdomain (xxxxx.docker) to give this container its own address.
     - VIRTUAL_HOST=localdevmeos.docker
+### Set the environment to load the settings.php file for. dev or our docker containers
+    - MEOS_SITE_ENVIRONMENT=dev
 #  volumes_from:
 #    - mysqldata
   volumes:
