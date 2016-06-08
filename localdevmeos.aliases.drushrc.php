@@ -2,6 +2,9 @@
 $aliases['dev'] = array(
   'root' => '/var/www',
   'uri' => 'localdevmeos.docker',
+  'remote-user' => 'root',
+  'remote-host' => 'localdevdrupal',
+  'ssh-options' => '-p 9022', // Or any other port you specify when running the container
   'path-aliases' => array(
     '%files' => 'sites/default/files', 
     ),
@@ -80,6 +83,8 @@ foreach ($aliases as &$alias) {
     continue;
   }
   if (gethostbyname($alias['remote-host']) == $ip) {
+    unset($alias['remote-user']);
+    unset($alias['ssh-options']);
     unset($alias['remote-host']);
   }
 }
