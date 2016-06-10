@@ -1,7 +1,7 @@
 <?php
-// Parent alias to be used for local development docker containers.
-// Aliases file name will look something like this:
-// environmentname.aliases.drushrc.php
+// Parent alias to be used for host computer that runs the development docker containers.
+// Aliases  will be copy to:
+// ~/.drush/docker.aliases.drushrc.php
 //
 // Add something like the code below to the aliases file to use all these
 // settings for the alias you are creating. Most likely this will be "dev".
@@ -9,7 +9,6 @@
 // <?php
 // $aliases['dev'] = array(
 //  'parent' => '@docker.localdev',
-//  'uri' => 'environmentname.docker',
 // );
 //
 // This alias can also be used directly to access the container running

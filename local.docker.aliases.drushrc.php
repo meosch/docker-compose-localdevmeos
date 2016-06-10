@@ -1,7 +1,7 @@
 <?php
 // Parent alias to be used for local development docker containers.
-// Aliases file name will look something like this:
-// environmentname.aliases.drushrc.php
+// Aliases file name that will be in the docker container folder:
+// .home-localdev/.drush/docker.aliases.drushrc.php
 //
 // Add something like the code below to the aliases file to use all these
 // settings for the alias you are creating. Most likely this will be "dev".
@@ -9,7 +9,6 @@
 // <?php
 // $aliases['dev'] = array(
 //  'parent' => '@docker.localdev',
-//  'uri' => 'environmentname.docker',
 // );
 //
 // This alias can also be used directly to access the container running
@@ -21,7 +20,7 @@ $aliases['localdev'] = array(
   'root' => '/var/www',
   'remote-user' => 'root',
   'remote-host' => 'localdevdrupal',
-  'ssh-options' => '-p 9022', // Or any other port you specify when running the container
+  'ssh-options' => '-p 22', // Or any other port you specify when running the container
   'path-aliases' => array(
     '%dump' => '/tmp/aaa-tmp/localdev-sql-dump.sql',
     '%files' => 'sites/default/files',
