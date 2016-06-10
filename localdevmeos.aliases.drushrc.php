@@ -1,7 +1,6 @@
 <?php
 $aliases['dev'] = array(
-  'root' => '/var/www',
-  'uri' => 'localdevmeos.docker',
+  'parent' => '@docker.localdev',
   'path-aliases' => array(
     '%files' => 'sites/default/files', 
     ),

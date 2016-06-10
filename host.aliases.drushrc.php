@@ -55,7 +55,7 @@ $aliases['live'] = array(
   'ssh-options' => '',    // port number ie. -p 22
   'path-aliases' => array(
     '%files' => 'sites/default/files',
-    '%dump-dir' => 'sql-sync-tmp  ', 
+    '%dump-dir' => 'sql-sync-tmp', 
     ),
   'target-command-specific' => array(
     'sql-sync' => array(
