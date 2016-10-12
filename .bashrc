@@ -5,8 +5,49 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
+### Anything we want to be processed in a non-interactive shell
+### (ie ssh user@host 'command-to-run')
+### should be place here before the
+### "If not run interactively, don't do anything" line below.
 
-# If not running interactively, don't do anything
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi
+# Change the umask from 002 to 022 so that group does not have write permissons by default.
+# http://my.oakhosting.net/knowledgebase/90/Umask-Solving-problem-caused-for-PHP-by-group-writeable-files.html
+umask 002
+
+# Set the time zone for bash
+export TZ=Europe/Zurich
+
+# Function to add directories to the $PATH. Checks if the exist and if they are already in the $PATH.
+pathadd() {
+    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
+        PATH="${PATH:+"$PATH:"}$1"
+    fi
+}
+
+# Export DRUSH_PHP fixes “fwrite(): supplied argument is not a valid stream resource” error
+# http://drupal.stackexchange.com/questions/100091/fwrite-supplied-argument-is-not-a-valid-stream-resource
+#export DRUSH_PHP='/usr/local/bin/php'
+
+# set PATH so it includes user's private bin if it exists
+pathadd "$HOME/bin"
+
+# Add Drush and other composer binaries to path if the folder exists
+pathadd "$HOME/.composer/vendor/bin"
+
+# Add Android SDK binary paths if they exist
+pathadd "$HOME/android/sdk/tools"
+pathadd "$HOME/android/sdk/platform-tools"
+
+# ********** If not running interactively, don't do anything more! ***********
 [ -z "$PS1" ] && return
 
 export GIT_PS1_SHOWDIRTYSTATE=yes
@@ -61,11 +102,16 @@ function parse_git_branch(){
           printf "$fish_git_not_dirty_color"
         else
           printf "$fish_git_dirty_color"
-        fi 
+        fi
     fi
-
-
 }
+
+# Add some neat bash completion to drush commands
+  if command -v drush >/dev/null ; then
+    if [ -f ~/.drush.bashrc ] ; then
+        . ~/.drush.bashrc
+    fi
+  fi
 
 set_bash_prompt(){
 # uncomment for a colored prompt, if the terminal has the capability; turned
@@ -88,17 +134,24 @@ if [ -n "${VIRTUAL_HOST}" ]; then
 else
   virtualhost=""
 fi
+
 if [ "$color_prompt" = yes ]; then
 #    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 #PS1='[\[\033[01;33m\]\d \[\033[01;37m\]\t \[\033[01;36m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]]$(parse_git_branch)$(__git_ps1) \[\033[00m\]$ '
-PS1='[\[\033[01;33m\]\d \[\033[01;37m\]\t \[\033[01;36m\]\u@\h\[\033[00m\]\[\033[01;37m\]${virtualhostmarker}\[\033[00;37m\]\[\033[04;34m\]${VIRTUAL_HOST}\[\033[00;34m\]\[\033[01;34m\]:\w\[\033[00m\]\[\033[1;35m\]$(__git_ps1) \[\033[00m\]$ '
+
+if command -v drush >/dev/null ; then
+PS1='[\[\033[01;33m\]\d \[\033[01;37m\]\t \[\033[01;36m\]\u@\h\[\033[00m\]\[\033[01;37m\]${virtualhostmarker}\[\033[00;37m\]\[\033[04;34m\]${VIRTUAL_HOST}\[\033[00;34m\]\[\033[01;34m\]:\w\[\033[00m\]\[\033[1;35m\]$(__git_ps1)\[\033[1;30m\]$(__drush_ps1)\[\033[00m\]]$ '
+else
+PS1='[\[\033[01;33m\]\d \[\033[01;37m\]\t \[\033[01;36m\]\u@\h\[\033[00m\]\[\033[01;37m\]${virtualhostmarker}\[\033[00;37m\]\[\033[04;34m\]${VIRTUAL_HOST}\[\033[00;34m\]\[\033[01;34m\]:\w\[\033[00m\]\[\033[1;35m\]$(__git_ps1)\[\033[00m\]]$ '
+fi
+
 else
 #    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-    PS1="[\d \t \u@\h \${VIRTUAL_HOST}:\w \$(__git_ps1)] $ "
+    PS1="[\d \t \u@\h \${VIRTUAL_HOST}:\w \$(__git_ps1) $(__drush_ps1) ] $ "
 fi
 # How to change Gnome-Terminal title? http://askubuntu.com/a/22417
 if [  $TERM = xterm ]; then
-echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~}\007"
+echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~} S{VIRTUAL_HOST}\007"
 fi
 }
 PROMPT_COMMAND=set_bash_prompt
@@ -113,17 +166,7 @@ xterm*|rxvt*)
     ;;
 esac
 
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
-# enable programmable completion features (you don't need to enable
+# Enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
@@ -133,11 +176,17 @@ fi
 #eval "$(rbenv init -)"
 
 # Part of keyboard/terminal bell fix
-[ "$DISPLAY" ] && xset b 100
+[ "$DISPLAY" ] && xset b 50
 
-# Add some neat bash completion to drush commands
-    if [ -f ~/.drush.bashrc ] ; then
-        . ~/.drush.bashrc
+# Add competion for the Github git wrapper hub
+if [ -f $HOME/bin/hub.bash_completion ]; then
+    . $HOME/bin/.hub.bash_completion.sh
+fi
+
+# If the file .meos_environment exists source it.
+# This file contains environmental variables that we want to load.
+if [ -f ~/.meos_environment ] ; then
+        . ~/.meos_environment
     fi
 
 # Send us to the Docker Container webroot /var/www/ as that is where we want to be most likely.
