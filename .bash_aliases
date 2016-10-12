@@ -32,3 +32,8 @@ alias lh='ls -lad .*'
 alias opensesame='chmod  +w  sites/default/settings.php sites/default/'
 alias closesesame='chmod -w sites/default/settings.php sites/default/'
 alias ali-baba='nano sites/default/settings.php'
+
+# Aliases added to the container in the Docker file for Drush 6, 7, 8 and Drupal Coding standards checker.
+ alias drush6='$HOME/drush6/vendor/bin/drush'
+ alias drush7='$HOME/drush7/vendor/bin/drush'
+ alias drush8='$HOME/.composer/vendor/bin/drush'
