@@ -26,7 +26,7 @@ The docker-gen.conf file will generate three different files using information f
 * **dockerhostdns.tmpl** generates **/tmp/dockerhosts/docker** sets a static ip address for the **.docker** domain
 
 #### Switch to docker-compose version 2
-The upstream project docker-compose-localdevmeos is switching to version 2 docker-compose files. Docker-compose now handles networking and an an new docker-gen nginx template file (nginx-v2.tmpl) was needed for docker-gen. the version 1 file is still available as nginix.tmpl for docker-compose version one files. Newly created project will use the docker-compose version 2 files.
+The parent project [meosch/docker-localdevdrupal](https://github.com/meosch/docker-localdevdrupal) switched to using version 2 docker-compose files. Docker-compose now handles networking and an an new docker-gen nginx template file (nginx-v2.tmpl) was needed for docker-gen. the version 1 file is still available as nginix.tmpl for docker-compose version one files. Newly created project will use the docker-compose version 2 files.
 
 ### Template Drush Alias file for other docker containers
 
