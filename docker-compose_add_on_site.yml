@@ -1,50 +1,52 @@
 ### See the line below that start with ### for changes needed when creating a new container with this file. - FJH
+version: "2"
 
-localdevdrupal:
-  hostname: localdevdrupal
-  image: meosch/localdevdrupal
-  expose:
-    - "80"
-    - "22"
-    - "3306"
-## Commenting out ports number as we do not use them. Left them here in case we want to use them later or turn them back on.
-## We can have every add on using the same host computer's port numbers.
-## Watching Interpolate environment variables #1765 to see if later we can configure these via environmental variables if we still need / want them.
-## https://github.com/docker/compose/pull/1765
-# ports: 
-#    - "9080:80"
-#    - "8022:22"
-#    - "8006:3306"
-#    - "8001:9001"
-  environment:
-# MySQL variables are not used. This is not working  for me. 
-#    - MYSQL_ROOT_PASSWORD=admin123
-#    - MYSQL_USER=drupal
-#    - MYSQL_PASSWORD=drupalrocks
-#    - MYSQL_DATABASE=drupal
-### Change the subdomain (xxxxx.docker) to give this container its own address.
-    - VIRTUAL_HOST=localdevmeos.docker
-### Set the environment to load the settings.php file for. dev or our docker containers
-    - MEOS_SITE_ENVIRONMENT=dev
-#  volumes_from:
-#    - mysqldata
-  volumes:
-    # Project root folder mapping
-    - "./public_html/:/var/www"
-    # MySQL data folder mapping
-    - "./mysqldata/:/data"
-    # Drupal private files folder. Set this to /var/tmp/private in Drupal.
-    - "./private/:/var/tmp/private"
-    # PHP configuration overrides
-    - "./.drude/etc/php5/php.ini:/etc/php5/fpm/conf.d/z_php.ini"
-    # Host SSH keys mappings.
-    # The startup.sh script in cli container will copy ssh and drush settings to the container.
-    - "~:/.home-linux"  # Linux
-    # Local Development Home overrides - Drush Alias need different settings if run on host or on container.
-    # These will be copied into the drush folder and are not live. 
-    - "./.home-localdev:/.home-localdev"
-#  links:
-#    - dockergen
-#    - mysqldata
-  extra_hosts:
-    - "docker:172.17.42.1"
+services:
+  localdevdrupal:
+    hostname: localdevdrupal
+    image: meosch/localdevdrupal
+    expose:
+      - "80"
+      - "22"
+      - "3306"
+  ## Commenting out ports number as we do not use them. Left them here in case we want to use them later or turn them back on.
+  ## We can have every add on using the same host computer's port numbers.
+  ## Watching Interpolate environment variables #1765 to see if later we can configure these via environmental variables if we still need / want them.
+  ## https://github.com/docker/compose/pull/1765
+  # ports:
+  #    - "9080:80"
+  #    - "8022:22"
+  #    - "8006:3306"
+  #    - "8001:9001"
+    environment:
+  # MySQL variables are not used. This is not working  for me.
+  #    - MYSQL_ROOT_PASSWORD=admin123
+  #    - MYSQL_USER=drupal
+  #    - MYSQL_PASSWORD=drupalrocks
+  #    - MYSQL_DATABASE=drupal
+  ### Change the subdomain (xxxxx.docker) to give this container its own address.
+      - VIRTUAL_HOST=localdevmeos.docker
+  ### Set the environment to load the settings.php file for. dev or our docker containers
+      - MEOS_SITE_ENVIRONMENT=dev
+  #  volumes_from:
+  #    - container:mysqldata
+    volumes:
+      # Project root folder mapping
+      - "./public_html/:/var/www"
+      # MySQL data folder mapping
+      - "./mysqldata/:/data"
+      # Drupal private files folder. Set this to /var/tmp/private in Drupal.
+      - "./private/:/var/tmp/private"
+      # PHP configuration overrides
+      - "./.drude/etc/php5/php.ini:/etc/php5/fpm/conf.d/z_php.ini"
+      # Host SSH keys mappings.
+      # The startup.sh script in cli container will copy ssh and drush settings to the container.
+      - "~:/.home-linux"  # Linux
+      # Local Development Home overrides - Drush Alias need different settings if run on host or on container.
+      # These will be copied into the drush folder and are not live.
+      - "./.home-localdev:/.home-localdev"
+  #  depends_on:
+  #    - dockergen
+  #    - mysqldata
+    extra_hosts:
+      - "docker:172.17.42.1"
