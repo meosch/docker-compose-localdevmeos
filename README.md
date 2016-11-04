@@ -25,6 +25,9 @@ The docker-gen.conf file will generate three different files using information f
 * **dnsmasq.tmpl** generates **/tmp/dockerhosts/dockerhosts** which can be used by the Docker host dnsmasq to allow the containers to be reachable from the host computer
 * **dockerhostdns.tmpl** generates **/tmp/dockerhosts/docker** sets a static ip address for the **.docker** domain
 
+#### Switch to docker-compose version 2
+The upstream project docker-compose-localdevmeos is switching to version 2 docker-compose files. Docker-compose now handles networking and an an new docker-gen nginx template file (nginx-v2.tmpl) was needed for docker-gen. the version 1 file is still available as nginix.tmpl for docker-compose version one files. Newly created project will use the docker-compose version 2 files.
+
 ### Template Drush Alias file for other docker containers
 
  The Drush alias template file **localdevmeos-docker_add_on.aliases.drushrc.php** will be modified by the setup-new-localdev.sh script to made it ready to use by other Docker containers. Just copy it to the other containers **.home-localdev/.drush/** folder so that it will be copied into the container on start up. If the container is already running a restart will be needed to use this new drush alias file. 
