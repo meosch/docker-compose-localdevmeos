@@ -151,7 +151,7 @@ else
 fi
 # How to change Gnome-Terminal title? http://askubuntu.com/a/22417
 if [  $TERM = xterm ]; then
-echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~} S{VIRTUAL_HOST}\007"
+echo -ne "\033]0;${USER}@${HOSTNAME}: ${PWD/$HOME/~} ${VIRTUAL_HOST}\007"
 fi
 }
 PROMPT_COMMAND=set_bash_prompt
