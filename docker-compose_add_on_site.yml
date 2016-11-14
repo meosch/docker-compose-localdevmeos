@@ -32,7 +32,7 @@ services:
   #    - container:mysqldata
     volumes:
       # Project root folder mapping
-      - "./public_html/:/var/www"
+      - "./project/:/var/www"
       # MySQL data folder mapping
       - "./mysqldata/:/data"
       # Drupal private files folder. Set this to /var/tmp/private in Drupal.
