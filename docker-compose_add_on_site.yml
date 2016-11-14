@@ -5,6 +5,7 @@ services:
   localdevdrupal:
     hostname: localdevdrupal
     image: meosch/localdevdrupal
+    network_mode: bridge
     expose:
       - "80"
       - "22"

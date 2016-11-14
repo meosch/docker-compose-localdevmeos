@@ -5,6 +5,7 @@ services:
   globalnginx:
     hostname: globalnginx
     image: nginx
+    network_mode: bridge
     volumes:
       - "/tmp/nginx:/etc/nginx/conf.d"
       - "~/units/globalnginx/certs:/etc/nginx/certs"
@@ -19,6 +20,7 @@ services:
   dockergen:
     hostname: dockergen
     image: jwilder/docker-gen
+    network_mode: bridge
     volumes_from:
       - globalnginx
     volumes:
@@ -32,6 +34,7 @@ services:
   localdevdrupal:
     hostname: localdevdrupal
     image: meosch/localdevdrupal
+    network_mode: bridge
     expose:
       - "80"
       - "22"
@@ -82,6 +85,7 @@ services:
   cli:
     hostname: cli
     image: meosch/drupal-cli:php-5.6
+    network_mode: bridge
     volumes_from:
       - localdevdrupal
     environment:
