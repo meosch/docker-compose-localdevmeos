@@ -99,9 +99,9 @@ function parse_git_branch(){
       gitbranch=$(git branch 2>/dev/null | grep -e '\* ' | sed 's/^..\(.*\)/\1/')
       git_diff=$(git diff 2>/dev/null)
         if [ -z "$git_diff" ]; then
-          printf "$fish_git_not_dirty_color"
+          printf % "$fish_git_not_dirty_color"
         else
-          printf "$fish_git_dirty_color"
+          printf % "$fish_git_dirty_color"
         fi
     fi
 }
@@ -136,14 +136,11 @@ else
 fi
 
 if [ "$color_prompt" = yes ]; then
-#    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-#PS1='[\[\033[01;33m\]\d \[\033[01;37m\]\t \[\033[01;36m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]]$(parse_git_branch)$(__git_ps1) \[\033[00m\]$ '
-
-if command -v drush >/dev/null ; then
-PS1='[\[\033[01;33m\]\d \[\033[01;37m\]\t \[\033[01;36m\]\u@\h\[\033[00m\]\[\033[01;37m\]${virtualhostmarker}\[\033[00;37m\]\[\033[04;34m\]${VIRTUAL_HOST}\[\033[00;34m\]\[\033[01;34m\]:\w\[\033[00m\]\[\033[1;35m\]$(__git_ps1)\[\033[1;30m\]$(__drush_ps1)\[\033[00m\]]$ '
-else
-PS1='[\[\033[01;33m\]\d \[\033[01;37m\]\t \[\033[01;36m\]\u@\h\[\033[00m\]\[\033[01;37m\]${virtualhostmarker}\[\033[00;37m\]\[\033[04;34m\]${VIRTUAL_HOST}\[\033[00;34m\]\[\033[01;34m\]:\w\[\033[00m\]\[\033[1;35m\]$(__git_ps1)\[\033[00m\]]$ '
-fi
+	if command -v drush >/dev/null ; then
+	PS1='[\[\033[01;33m\]\d \[\033[01;37m\]\t \[\033[01;36m\]\u@\h\[\033[00m\]\[\033[01;37m\]${virtualhostmarker}\[\033[00;37m\]\[\033[04;34m\]${VIRTUAL_HOST}\[\033[00;34m\]\[\033[01;34m\]:\w\[\033[00m\]\[\033[1;35m\]$(__git_ps1)\[\033[1;30m\]$(__drush_ps1)\[\033[00m\]]\$ '
+	else
+	PS1='[\[\033[01;33m\]\d \[\033[01;37m\]\t \[\033[01;36m\]\u@\h\[\033[00m\]\[\033[01;37m\]${virtualhostmarker}\[\033[00;37m\]\[\033[04;34m\]${VIRTUAL_HOST}\[\033[00;34m\]\[\033[01;34m\]:\w\[\033[00m\]\[\033[1;35m\]$(__git_ps1)\[\033[00m\]]\$ '
+	fi
 
 else
 #    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
@@ -190,4 +187,4 @@ if [ -f ~/.meos_environment ] ; then
     fi
 
 # Send us to the Docker Container webroot /var/www/ as that is where we want to be most likely.
-cd /var/www/
+cd /var/www/ || exit
