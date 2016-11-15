@@ -65,6 +65,8 @@ services:
       - "./private/:/var/tmp/private"
       # PHP configuration overrides
       - "./.drude/etc/php5/php.ini:/etc/php5/fpm/conf.d/z_php.ini"
+      # PHP CLI configuration overrides
+      - "./.drude/etc/php5/php-cli.ini:/etc/php5/cli/conf.d/z_php.ini"
       # Host SSH keys mappings.
       # The startup.sh script in cli container will copy ssh and drush settings to the container.
       - "~:/.home-linux"  # Linux
